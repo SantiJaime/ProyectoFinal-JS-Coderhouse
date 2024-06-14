@@ -1,12 +1,11 @@
 let products = [];
 
-const getProducts = () => {
-  fetch("/products.json")
-    .then((response) => response.json())
-    .then((res) => {
-      products = res;
-      showProducts(res);
-    });
+const getProducts = async () => {
+  const response = await fetch("/products.json");
+  const res = await response.json()
+
+  products = res;
+  showProducts(products);
 };
 
 const addProdInCart = (id) => {
@@ -48,6 +47,7 @@ const searchProd = document.querySelector("#searchProd");
 
 const showProducts = (products) => {
   divProducts.innerHTML = "";
+
   products.forEach((prod) => {
     const colDiv = document.createElement("div");
     colDiv.className = "col-lg-3 col-md-6 col-sm-6 my-3";
